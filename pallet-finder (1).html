@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>איתור אריזות במשטחים</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="איתור אריזות">
+<meta name="theme-color" content="#12151a">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADtElEQVR4nO3cQW7USACFYdo7tpGyiZRVLsIpOAJbzsIFWOZiSFwAhWxZICFoXrddlXK7yv6+JXieZbmGyaTzc7q7f3hX5duX95d+6/Hzq80dbE5X/vm6u87+rs1RNqeKey+53uYONqfSe7vyOFdORYu7+XfC5pLrp4XXVdzV5uib/xyOK1/B1t3V5tCb0+wVa9zV5hCb0yZ3tTnE5rTJXW0OsXm68h3SsZ7EZvPNafaKNe5qc4jNfDhGfBKbzTfD4Rj0SWw23zw/HOM+ic3mmwXfIW14V5tDbJZ9ttLqrjaH2Cz+VLbJXW0OsXm6u3+ouOuHp6/XL/j+8VPpJqt6/fnj7Ffmf56j+jwytCXv/eI3wdixhX8i1ByO6p93pQfL/1tRfDicjKEVfRVRdjicjKGVfn1ZcDicjKFV/J/H0sPhZBzQosPhZBzT/OFwMo7p8fPrzOFwMo7p93u/djicjGP6894vHo41PgGif3+/93w4nIxjOnvv4XA4Gcf0/3s/PxxOxjHF9756K0v/tmll6d82rSz926aVpX+z731yMo5pm1aW/m3TytK/bVpZ+rdNK0v/tmll6d82rSxDW7GVZWjX33vN333OPmhlybSyZFpZMq0smVaWTCtLppWlJa0sF2llybSyZFpZMq0smVaWTCtLppUl08qSaWXJtLJkWlkyrSyZVpZMK0umlSXTypJpZcm0shTTypJpZcm0smRaWTKtLJlWlkwrS6aVJdPK0pJWlou0smRaWTKtLJlWlkwrS6aVJdPKkmllybSyZFpZMq0smVaWTCtLppUl08qSaWXJtLJkWlmKaWXJtLJkWlkyrSyZVpZMK0umlSXTypJpZWlJK8tFWlkyrSyZVpZMK0umlSXTypJpZcm0smRaWTKtLJlWlkwrS6aVJdPKkmllybSyZFpZMq0sxbSyZFpZMq0smVaWTCtLppUl08qSaWXJtLK0pJXlIq0smVaWTCtLppUl08qSaWXJtLJkWlkyrSyZVpZMK0umlSXTypJpZcm0smRaWTKtLJlWlmJaWTKtLJlWlkwrS6aVJdPKkhV9FXF6eX5afvUan9LZ7HazTSvbw5PYbL7ZoJXt5ElsNt98ayvbz5PYbL75pla2qyex2XyzvpXt7UlsNt+sbGU7fBKbzTdv2sraHGvzdq2szeE2b9TK2hxx8xatrM1BN1dvZW2Ou7luK2tz6M0VW1mbo2+eXp6fZj+Fr7i3zR1snu7uH5YMFd174c982Ox8s/3fYOzK3Vz5Cy5fygBE/PNjAAAAAElFTkSuQmCC">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADtElEQVR4nO3cQW7USACFYdo7tpGyiZRVLsIpOAJbzsIFWOZiSFwAhWxZICFoXrddlXK7yv6+JXieZbmGyaTzc7q7f3hX5duX95d+6/Hzq80dbE5X/vm6u87+rs1RNqeKey+53uYONqfSe7vyOFdORYu7+XfC5pLrp4XXVdzV5uib/xyOK1/B1t3V5tCb0+wVa9zV5hCb0yZ3tTnE5rTJXW0OsXm68h3SsZ7EZvPNafaKNe5qc4jNfDhGfBKbzTfD4Rj0SWw23zw/HOM+ic3mmwXfIW14V5tDbJZ9ttLqrjaH2Cz+VLbJXW0OsXm6u3+ouOuHp6/XL/j+8VPpJqt6/fnj7Ffmf56j+jwytCXv/eI3wdixhX8i1ByO6p93pQfL/1tRfDicjKEVfRVRdjicjKGVfn1ZcDicjKFV/J/H0sPhZBzQosPhZBzT/OFwMo7p8fPrzOFwMo7p93u/djicjGP6894vHo41PgGif3+/93w4nIxjOnvv4XA4Gcf0/3s/PxxOxjHF9756K0v/tmll6d82rSz926aVpX+z731yMo5pm1aW/m3TytK/bVpZ+rdNK0v/tmll6d82rSxDW7GVZWjX33vN333OPmhlybSyZFpZMq0smVaWTCtLppWlJa0sF2llybSyZFpZMq0smVaWTCtLppUl08qSaWXJtLJkWlkyrSyZVpZMK0umlSXTypJpZcm0shTTypJpZcm0smRaWTKtLJlWlkwrS6aVJdPK0pJWlou0smRaWTKtLJlWlkwrS6aVJdPKkmllybSyZFpZMq0smVaWTCtLppUl08qSaWXJtLJkWlmKaWXJtLJkWlkyrSyZVpZMK0umlSXTypJpZWlJK8tFWlkyrSyZVpZMK0umlSXTypJpZcm0smRaWTKtLJlWlkwrS6aVJdPKkmllybSyZFpZMq0sxbSyZFpZMq0smVaWTCtLppUl08qSaWXJtLK0pJXlIq0smVaWTCtLppUl08qSaWXJtLJkWlkyrSyZVpZMK0umlSXTypJpZcm0smRaWTKtLJlWlmJaWTKtLJlWlkwrS6aVJdPKkhV9FXF6eX5afvUan9LZ7HazTSvbw5PYbL7ZoJXt5ElsNt98ayvbz5PYbL75pla2qyex2XyzvpXt7UlsNt+sbGU7fBKbzTdv2sraHGvzdq2szeE2b9TK2hxx8xatrM1BN1dvZW2Ou7luK2tz6M0VW1mbo2+eXp6fZj+Fr7i3zR1snu7uH5YMFd174c982Ox8s/3fYOzK3Vz5Cy5fygBE/PNjAAAAAElFTkSuQmCC">
+<style>
+  :root{
+    --bg: #12151a;
+    --panel: #1b1f27;
+    --panel-2: #232833;
+    --line: #2c313c;
+    --text: #eef0f3;
+    --muted: #8a92a3;
+    --amber: #f5a623;
+    --amber-dim: #7a5716;
+    --cyan: #35c9c1;
+    --danger: #e2584d;
+    --radius: 14px;
+    --mono: 'SFMono-Regular', Consolas, 'Courier New', monospace;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  html,body{margin:0; padding:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+    min-height:100vh; min-height:100dvh;
+    -webkit-text-size-adjust:100%; overscroll-behavior-y:none;}
+  body{
+    background-image:
+      linear-gradient(180deg, rgba(245,166,35,0.06), transparent 220px);
+    padding-top:env(safe-area-inset-top);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  input, textarea{font-size:16px;} /* prevents iOS auto-zoom on focus */
+  .wrap{max-width:640px; margin:0 auto; padding:14px 14px calc(90px + env(safe-area-inset-bottom));}
+
+  header.top{
+    position:sticky; top:0; z-index:20; background:rgba(18,21,26,0.92);
+    backdrop-filter: blur(8px); padding:calc(12px + env(safe-area-inset-top)) 14px 10px; margin:calc(-1 * env(safe-area-inset-top)) -14px 6px;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+  .brand .tag{
+    width:34px; height:34px; border-radius:8px;
+    background:repeating-linear-gradient(45deg, var(--amber), var(--amber) 4px, #a5720f 4px, #a5720f 8px);
+    flex:none; position:relative; box-shadow:0 0 0 1px rgba(0,0,0,0.3) inset;
+  }
+  .brand h1{font-size:17px; margin:0; font-weight:700; letter-spacing:.2px;}
+  .brand p{margin:1px 0 0; font-size:12px; color:var(--muted);}
+
+  .searchbox{
+    display:flex; align-items:center; gap:8px;
+    background:var(--panel); border:1.5px solid var(--line); border-radius:12px;
+    padding:10px 12px;
+  }
+  .searchbox:focus-within{border-color:var(--amber);}
+  .searchbox svg{flex:none; opacity:.6;}
+  .searchbox input{
+    flex:1; background:transparent; border:0; outline:0; color:var(--text);
+    font-size:16px; font-family:var(--mono); letter-spacing:.3px;
+  }
+  .searchbox input::placeholder{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color:var(--muted); letter-spacing:0;}
+  .clear-btn{
+    border:0; background:var(--panel-2); color:var(--muted); border-radius:8px;
+    width:26px; height:26px; font-size:14px; cursor:pointer; display:none; flex:none;
+  }
+
+  .tabs{display:flex; gap:8px; margin:12px 0 4px;}
+  .tab{
+    flex:1; text-align:center; padding:9px 6px; border-radius:10px; font-size:13px;
+    font-weight:600; background:var(--panel); color:var(--muted); border:1px solid var(--line);
+    cursor:pointer; user-select:none;
+  }
+  .tab.active{background:var(--amber); color:#1a1206; border-color:var(--amber);}
+
+  .section-title{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin:16px 2px 8px; font-size:13px; color:var(--muted);
+  }
+  .section-title b{color:var(--text); font-size:14px;}
+
+  /* Pallet chip grid */
+  .pallet-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .pallet-chip{
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    padding:10px 12px; cursor:pointer; position:relative; overflow:hidden;
+  }
+  .pallet-chip::before{
+    content:""; position:absolute; right:0; top:0; bottom:0; width:5px;
+    background:var(--cyan);
+  }
+  .pallet-chip .pn{font-family:var(--mono); font-size:12.5px; color:var(--text); font-weight:700; letter-spacing:.3px;}
+  .pallet-chip .meta{font-size:11.5px; color:var(--muted); margin-top:4px;}
+  .pallet-chip.active{border-color:var(--cyan); background:#17262a;}
+
+  /* Result cards */
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:12px 14px; margin-bottom:9px; display:flex; align-items:center; gap:12px;
+  }
+  .card .cap{
+    flex:none; width:46px; height:46px; border-radius:10px; background:var(--panel-2);
+    display:flex; align-items:center; justify-content:center; font-size:10.5px;
+    color:var(--amber); font-weight:700; font-family:var(--mono); border:1px solid var(--line);
+    text-align:center; line-height:1.15;
+  }
+  .card .body{flex:1; min-width:0;}
+  .card .cpn{font-family:var(--mono); font-size:14.5px; font-weight:700; color:var(--text); word-break:break-all;}
+  .card .row2{display:flex; flex-wrap:wrap; gap:6px 10px; margin-top:5px; font-size:12px; color:var(--muted);}
+  .card .row2 .pallet-tag{
+    font-family:var(--mono); background:var(--panel-2); border:1px solid var(--line);
+    border-radius:6px; padding:1px 7px; color:var(--cyan); cursor:pointer;
+  }
+  .card .qty{
+    flex:none; text-align:left; font-family:var(--mono); font-weight:700; color:var(--amber);
+    font-size:14px; white-space:nowrap;
+  }
+  .card .qty span{display:block; font-size:9.5px; color:var(--muted); font-weight:400; font-family:-apple-system,sans-serif;}
+
+  .empty{
+    text-align:center; padding:40px 10px; color:var(--muted); font-size:14px;
+  }
+  .empty b{display:block; color:var(--text); font-size:15px; margin-bottom:4px;}
+
+  .pallet-header{
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    padding:12px 14px; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .pallet-header .pn{font-family:var(--mono); font-weight:700; font-size:15px;}
+  .pallet-header .cnt{font-size:12px; color:var(--muted); margin-top:2px;}
+  .back-btn{
+    border:1px solid var(--line); background:var(--panel-2); color:var(--text);
+    border-radius:9px; padding:8px 12px; font-size:13px; cursor:pointer; flex:none;
+  }
+
+  ::-webkit-scrollbar{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="tag"></div>
+      <div>
+        <h1>איתור אריזות</h1>
+        <p>חיפוש רכיב או עיון לפי משטח</p>
+      </div>
+    </div>
+    <div class="searchbox">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" inputmode="search" autocomplete="off" placeholder="חיפוש לפי מק״ט (CPN) או מספר משטח...">
+      <button class="clear-btn" id="clearBtn">✕</button>
+    </div>
+    <div class="tabs">
+      <div class="tab active" data-tab="search">חיפוש רכיבים</div>
+      <div class="tab" data-tab="pallets">עיון לפי משטח</div>
+    </div>
+  </header>
+
+  <div id="searchView">
+    <div class="section-title"><b id="resultCount">323 רכיבים</b><span>כלל המלאי</span></div>
+    <div id="resultsList"></div>
+  </div>
+
+  <div id="palletsView" style="display:none;">
+    <div id="palletDetail" style="display:none;"></div>
+    <div id="palletGridWrap">
+      <div class="section-title"><b>13 משטחים</b><span>הקש לצפייה בתכולה</span></div>
+      <div class="pallet-grid" id="palletGrid"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = [{"cpn": "CL05C2R2BB5NNNC#", "qty": 100000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL10B105KO8NNNC#", "qty": 188000, "pallet": "GMPL2607270018", "capa": "1608"}, {"cpn": "CL31B105KAHNNNE#", "qty": 36000, "pallet": "GMPL2607270018", "capa": "3216"}, {"cpn": "CL05A474KP5NNNC#", "qty": 110000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05A474KP5NNNC#", "qty": 220000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05A474KQ5NNNC#", "qty": 490000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL10X476MR8NRWC#", "qty": 16000, "pallet": "GMPL2607270018", "capa": "1608"}, {"cpn": "CL10B105KO8NNNC#", "qty": 20000, "pallet": "GMPL2607270018", "capa": "1608"}, {"cpn": "CL05A105KA5NQNC#", "qty": 70000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05A225MQ5NSNC#", "qty": 170000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05B105KQ5NQNC#", "qty": 50000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05B224KP5NNNC#", "qty": 150000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL10B104KB8NNNC#", "qty": 272000, "pallet": "GMPL2607270018", "capa": "1608"}, {"cpn": "CL10B106MQ8NRNC#", "qty": 96000, "pallet": "GMPL2607270018", "capa": "1608"}, {"cpn": "CL21B225KAFNNNE#", "qty": 14000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL10A106KQ8NNNC#", "qty": 240000, "pallet": "GMPL2607270018", "capa": "1608"}, {"cpn": "CL21B225KAFNNNE#", "qty": 66000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL05C101JB5NNNC#", "qty": 30000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL21B475KOFNNNE#", "qty": 58000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL31X226KAHN3NE#", "qty": 68000, "pallet": "GMPL2607270018", "capa": "3216"}, {"cpn": "CL21X226MOYNNWE#", "qty": 860000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL31B104KEHSFNE#", "qty": 68000, "pallet": "GMPL2607270018", "capa": "3216"}, {"cpn": "CL31A106KAHNNNE#", "qty": 406000, "pallet": "GMPL2607270018", "capa": "3216"}, {"cpn": "CL21A226KOQNNNE#", "qty": 38000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL21X226MOYNNWE#", "qty": 98000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL21A106KAYNNNE#", "qty": 104000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL31B475KAHNNNE#", "qty": 6000, "pallet": "GMPL2607270018", "capa": "3216"}, {"cpn": "CL31B475KAHNNNE#", "qty": 12000, "pallet": "GMPL2607270018", "capa": "3216"}, {"cpn": "CL21X476MRYNNNE#", "qty": 68000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL05A105KA5NQNC#", "qty": 10000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05A105KP5NNNC#", "qty": 230000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05B105KQ5NQNC#", "qty": 500000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05B474KP5NNNC#", "qty": 400000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05A226MQ5QUNC#", "qty": 10000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05B104KO5NNNC#", "qty": 70000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL10A105KP8NNNC#", "qty": 332000, "pallet": "GMPL2607270018", "capa": "1608"}, {"cpn": "CL05C220JB5NNNC#", "qty": 40000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL21B104KCFSFNE#", "qty": 22000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL21X107MRYNNWE#", "qty": 42000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL21B104KCFSFNE#", "qty": 18000, "pallet": "GMPL2607270018", "capa": "2012"}, {"cpn": "CL05B102JB5NNNC#", "qty": 30000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05B474KP5NNNC#", "qty": 120000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL05B104KP5NNNC#", "qty": 10000, "pallet": "GMPL2607270018", "capa": "1005"}, {"cpn": "CL32A107MPVNNNE", "qty": 37000, "pallet": "GMPL2607270018", "capa": "3225"}, {"cpn": "CL05A225MQ5NSNC#", "qty": 1110000, "pallet": "GMPL2607270021", "capa": "1005"}, {"cpn": "CL10A106KP8NNNC#", "qty": 500000, "pallet": "GMPL2607270021", "capa": "1608"}, {"cpn": "CL31A106KAHNNNE#", "qty": 98000, "pallet": "GMPL2607270021", "capa": "3216"}, {"cpn": "CL31A226KAHNNNE#", "qty": 48000, "pallet": "GMPL2607270021", "capa": "3216"}, {"cpn": "CL10A106KP8NNNC#", "qty": 92000, "pallet": "GMPL2607270021", "capa": "1608"}, {"cpn": "CL31A106KAHNNNE#", "qty": 128000, "pallet": "GMPL2607270021", "capa": "3216"}, {"cpn": "CL21A106KAYNNNE#", "qty": 500000, "pallet": "GMPL2607270021", "capa": "2012"}, {"cpn": "CL31A226KAHNNNE#", "qty": 772000, "pallet": "GMPL2607270021", "capa": "3216"}, {"cpn": "CL31A106KAHNNNE#", "qty": 312000, "pallet": "GMPL2607270021", "capa": "3216"}, {"cpn": "CL21A106KAYNNNE#", "qty": 432000, "pallet": "GMPL2607270021", "capa": "2012"}, {"cpn": "CL31A106KAHNNNE#", "qty": 500000, "pallet": "GMPL2607270021", "capa": "3216"}, {"cpn": "CL10A106KP8NNNC#", "qty": 760000, "pallet": "GMPL2607270021", "capa": "1608"}, {"cpn": "CL05B104KO5NNNC#", "qty": 4600000, "pallet": "GMPL2607270021", "capa": "1005"}, {"cpn": "CL05B104KO5NNNC#", "qty": 2920000, "pallet": "GMPL2607270021", "capa": "1005"}, {"cpn": "CL05A225MQ5NSNC#", "qty": 140000, "pallet": "GMPL2607270022", "capa": "1005"}, {"cpn": "CL05B224KP5NNNC#", "qty": 450000, "pallet": "GMPL2607270022", "capa": "1005"}, {"cpn": "CL21A226MQQNNNE#", "qty": 300000, "pallet": "GMPL2607270022", "capa": "2012"}, {"cpn": "CL31A107MQHNNNE#", "qty": 62000, "pallet": "GMPL2607270022", "capa": "3216"}, {"cpn": "CL31A107MQHNNNE#", "qty": 500000, "pallet": "GMPL2607270022", "capa": "3216"}, {"cpn": "CL05A225MQ5NSNC#", "qty": 410000, "pallet": "GMPL2607270022", "capa": "1005"}, {"cpn": "CL05B224KP5NNNC#", "qty": 130000, "pallet": "GMPL2607270022", "capa": "1005"}, {"cpn": "CL31A107MQHNNNE#", "qty": 976000, "pallet": "GMPL2607270022", "capa": "3216"}, {"cpn": "CL32B226KAJNNNE#", "qty": 87000, "pallet": "GMPL2607270022", "capa": "3225"}, {"cpn": "CL31X226KAHN3NE#", "qty": 100000, "pallet": "GMPL2607270022", "capa": "3216"}, {"cpn": "CL21A226MQQNNNE#", "qty": 1000000, "pallet": "GMPL2607270022", "capa": "2012"}, {"cpn": "CL21A226MQQNNNE#", "qty": 352000, "pallet": "GMPL2607270022", "capa": "2012"}, {"cpn": "CL21A475KBQNNNE#", "qty": 218000, "pallet": "GMPL2607270022", "capa": "2012"}, {"cpn": "CL21X226MOYNNWE#", "qty": 678000, "pallet": "GMPL2607270022", "capa": "2012"}, {"cpn": "CL03A104KQ3NNNC#", "qty": 530000, "pallet": "GMPL2607270022", "capa": "0603"}, {"cpn": "CL21A476MQYNNNE#", "qty": 144000, "pallet": "GMPL2607270023", "capa": "2012"}, {"cpn": "CL21A476MQYNNNE#", "qty": 200000, "pallet": "GMPL2607270023", "capa": "2012"}, {"cpn": "CL21A476MQYNNNE#", "qty": 152000, "pallet": "GMPL2607270023", "capa": "2012"}, {"cpn": "CL21A476MQYNNNE#", "qty": 250000, "pallet": "GMPL2607270023", "capa": "2012"}, {"cpn": "CL10A106MQ8NNNC#", "qty": 928000, "pallet": "GMPL2607270023", "capa": "1608"}, {"cpn": "CL21A476MQYNNNE#", "qty": 478000, "pallet": "GMPL2607270023", "capa": "2012"}, {"cpn": "CL10B104KB8NNNC#", "qty": 1660000, "pallet": "GMPL2607270023", "capa": "1608"}, {"cpn": "CL21X106KAYNNNE#", "qty": 566000, "pallet": "GMPL2607270023", "capa": "2012"}, {"cpn": "CL21A476MQYNNNE#", "qty": 1000000, "pallet": "GMPL2607270023", "capa": "2012"}, {"cpn": "CL31B106KAHNNNE#", "qty": 358000, "pallet": "GMPL2607270023", "capa": "3216"}, {"cpn": "CL05A475MQ5NRNC#", "qty": 520000, "pallet": "GMPL2607270024", "capa": "1005"}, {"cpn": "CL21A226MAYNNNE#", "qty": 380000, "pallet": "GMPL2607270024", "capa": "2012"}, {"cpn": "CL05A475MQ5NRNC#", "qty": 2490000, "pallet": "GMPL2607270024", "capa": "1005"}, {"cpn": "CL21A226MAYNNNE#", "qty": 124000, "pallet": "GMPL2607270024", "capa": "2012"}, {"cpn": "CL21B225KAFNNNE#", "qty": 120000, "pallet": "GMPL2607270024", "capa": "2012"}, {"cpn": "CL21B104KBCNNNC#", "qty": 224000, "pallet": "GMPL2607270024", "capa": "2012"}, {"cpn": "CL21B106KAYQNNE#", "qty": 660000, "pallet": "GMPL2607270024", "capa": "2012"}, {"cpn": "CL21A475KAQNNNE#", "qty": 886000, "pallet": "GMPL2607270024", "capa": "2012"}, {"cpn": "CL31X226KAHN3NE#", "qty": 500000, "pallet": "GMPL2607270024", "capa": "3216"}, {"cpn": "CL05B104KP5NNNC#", "qty": 2000000, "pallet": "GMPL2607270024", "capa": "1005"}, {"cpn": "CL21A106KPFNNNE#", "qty": 182000, "pallet": "GMPL2607270025", "capa": "2012"}, {"cpn": "CL03A225MQ3CRNC#", "qty": 1950000, "pallet": "GMPL2607270025", "capa": "0603"}, {"cpn": "CL10B105KO8NNNC#", "qty": 404000, "pallet": "GMPL2607270025", "capa": "1608"}, {"cpn": "CL21A106KPFNNNE#", "qty": 300000, "pallet": "GMPL2607270025", "capa": "2012"}, {"cpn": "CL21X226MQQNNNE#", "qty": 430000, "pallet": "GMPL2607270025", "capa": "2012"}, {"cpn": "CL21B105KAFNNNE#", "qty": 520000, "pallet": "GMPL2607270025", "capa": "2012"}, {"cpn": "CL10A106MO8NQNC#", "qty": 188000, "pallet": "GMPL2607270025", "capa": "1608"}, {"cpn": "CL10A105KB8NNNC#", "qty": 324000, "pallet": "GMPL2607270025", "capa": "1608"}, {"cpn": "CL31A226KAHNNNE#", "qty": 292000, "pallet": "GMPL2607270025", "capa": "3216"}, {"cpn": "CL10B333KB8NNNC#", "qty": 200000, "pallet": "GMPL2607270025", "capa": "1608"}, {"cpn": "CL10A106MO8NQNC#", "qty": 1000000, "pallet": "GMPL2607270025", "capa": "1608"}, {"cpn": "CL10A226MQ8NRNC#", "qty": 256000, "pallet": "GMPL2607270025", "capa": "1608"}, {"cpn": "CL21A106KPFNNNE#", "qty": 352000, "pallet": "GMPL2607270025", "capa": "2012"}, {"cpn": "CL21X476MRYNNNE#", "qty": 600000, "pallet": "GMPL2607270025", "capa": "2012"}, {"cpn": "CL21X226MQQNNNE#", "qty": 726000, "pallet": "GMPL2607270025", "capa": "2012"}, {"cpn": "CL10A106MQ8NNNC#", "qty": 64000, "pallet": "GMPL2607270026", "capa": "1608"}, {"cpn": "CL10B105KO8NNNC#", "qty": 556000, "pallet": "GMPL2607270026", "capa": "1608"}, {"cpn": "CL05A106MQ5NUNC#", "qty": 1010000, "pallet": "GMPL2607270026", "capa": "1005"}, {"cpn": "CL21X226MOYNNWE#", "qty": 378000, "pallet": "GMPL2607270026", "capa": "2012"}, {"cpn": "CL21X226MOYNNWE#", "qty": 58000, "pallet": "GMPL2607270026", "capa": "2012"}, {"cpn": "CL21B105KAFNNNE#", "qty": 348000, "pallet": "GMPL2607270026", "capa": "2012"}, {"cpn": "CL21B103KBANNNC#", "qty": 300000, "pallet": "GMPL2607270026", "capa": "2012"}, {"cpn": "CL31A226KAHNNNE#", "qty": 240000, "pallet": "GMPL2607270026", "capa": "3216"}, {"cpn": "CL10A106MQ8NNNC#", "qty": 368000, "pallet": "GMPL2607270026", "capa": "1608"}, {"cpn": "CL31B106KOHNNNE#", "qty": 250000, "pallet": "GMPL2607270026", "capa": "3216"}, {"cpn": "CL21X226MOYNNWE#", "qty": 242000, "pallet": "GMPL2607270026", "capa": "2012"}, {"cpn": "CL31A106KBHNNNE#", "qty": 246000, "pallet": "GMPL2607270026", "capa": "3216"}, {"cpn": "CL31B106KOHNNNE#", "qty": 1212000, "pallet": "GMPL2607270026", "capa": "3216"}, {"cpn": "CL05A105KO5NNNC#", "qty": 1160000, "pallet": "GMPL2607270026", "capa": "1005"}, {"cpn": "CL10B105KQ8NNNC#", "qty": 300000, "pallet": "GMPL2607270026", "capa": "1608"}, {"cpn": "CL10A226MP8NUNE#", "qty": 147000, "pallet": "GMPL2607270027", "capa": "1608"}, {"cpn": "CL10A105KA8NNNC#", "qty": 120000, "pallet": "GMPL2607270027", "capa": "1608"}, {"cpn": "CL21B105KOFNNNE#", "qty": 152000, "pallet": "GMPL2607270027", "capa": "2012"}, {"cpn": "CL31B106KBHNNNE#", "qty": 150000, "pallet": "GMPL2607270027", "capa": "3216"}, {"cpn": "CL10B105KA8NNNC#", "qty": 40000, "pallet": "GMPL2607270027", "capa": "1608"}, {"cpn": "CL10B105KA8NNNC#", "qty": 12000, "pallet": "GMPL2607270027", "capa": "1608"}, {"cpn": "CL21B106KAYQNNE#", "qty": 166000, "pallet": "GMPL2607270027", "capa": "2012"}, {"cpn": "CL31A226KAHNNNE#", "qty": 618000, "pallet": "GMPL2607270027", "capa": "3216"}, {"cpn": "CL31A106KAHNNNE#", "qty": 200000, "pallet": "GMPL2607270027", "capa": "3216"}, {"cpn": "CL10B105KB8NQNC#", "qty": 1504000, "pallet": "GMPL2607270027", "capa": "1608"}, {"cpn": "CL31B475KAHNNNE#", "qty": 190000, "pallet": "GMPL2607270027", "capa": "3216"}, {"cpn": "CL10A106MQ8NNNC#", "qty": 256000, "pallet": "GMPL2607270027", "capa": "1608"}, {"cpn": "CL31B106KOHNNNE#", "qty": 324000, "pallet": "GMPL2607270027", "capa": "3216"}, {"cpn": "CL05A105KQ5NNNC#", "qty": 2310000, "pallet": "GMPL2607270027", "capa": "1005"}, {"cpn": "CL05B105KQ5NQNC#", "qty": 1310000, "pallet": "GMPL2607270027", "capa": "1005"}, {"cpn": "CL05A105KO5NNNC#", "qty": 2100000, "pallet": "GMPL2607270027", "capa": "1005"}, {"cpn": "CL05A105KQ5NNNC#", "qty": 1100000, "pallet": "GMPL2607270027", "capa": "1005"}, {"cpn": "CL05B104KO5NNNC#", "qty": 1500000, "pallet": "GMPL2607270027", "capa": "1005"}, {"cpn": "CL32B106KBJNNWE#", "qty": 75000, "pallet": "GMPL2607270027", "capa": "3225"}, {"cpn": "CL31B106KAHNNNE#", "qty": 8000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL10B105KO8NNNC#", "qty": 24000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL31B104KEHSFNE#", "qty": 70000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL32A227MQVNNNE#", "qty": 9000, "pallet": "GMPL2607270028", "capa": "3225"}, {"cpn": "CL31A226MPHNNNE#", "qty": 4000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL05A475MP5NRNC#", "qty": 190000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05A475MP5NRNC#", "qty": 60000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05A474KP5NNNC#", "qty": 50000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL21F105ZBFNNNE#", "qty": 52000, "pallet": "GMPL2607270028", "capa": "2012"}, {"cpn": "CL21B106KPQNNNE#", "qty": 22000, "pallet": "GMPL2607270028", "capa": "2012"}, {"cpn": "CL32B106KBJNNNE#", "qty": 20000, "pallet": "GMPL2607270028", "capa": "3225"}, {"cpn": "CL32B106KBJNNNE#", "qty": 25000, "pallet": "GMPL2607270028", "capa": "3225"}, {"cpn": "CL31B106KOHZFNE#", "qty": 96000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL05C3R3BB5NNNC#", "qty": 100000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL10X476MR8NRWC#", "qty": 16000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL31B475KBHNNNE#", "qty": 12000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL21X226MOYNNWE#", "qty": 338000, "pallet": "GMPL2607270028", "capa": "2012"}, {"cpn": "CL31A107MQHNNNE#", "qty": 14000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL21B475KPFNNNE#", "qty": 2000, "pallet": "GMPL2607270028", "capa": "2012"}, {"cpn": "CL10B225KP8NNNC#", "qty": 36000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL10B105KA8NNNC#", "qty": 132000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL21B475KOFNNNE#", "qty": 4000, "pallet": "GMPL2607270028", "capa": "2012"}, {"cpn": "CL05C3R3BB5NNNC#", "qty": 180000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05C3R3BB5NNNC#", "qty": 10000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL21X226MOYNNWE#", "qty": 140000, "pallet": "GMPL2607270028", "capa": "2012"}, {"cpn": "CL10C471JB8NNNC#", "qty": 180000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL21A475KAQNNNE#", "qty": 10000, "pallet": "GMPL2607270028", "capa": "2012"}, {"cpn": "CL21A475KAQNNNE#", "qty": 70000, "pallet": "GMPL2607270028", "capa": "2012"}, {"cpn": "CL31B106KOHNNNE#", "qty": 122000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL10A475KP8NNNC#", "qty": 180000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL10A475KQ8NNNC#", "qty": 112000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL31B106KOHNNNE#", "qty": 58000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL31A106KBHNNNE#", "qty": 244000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL05A105KP5NNNC#", "qty": 260000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05B104KO5NNNC#", "qty": 400000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05B105KQ5NQNC#", "qty": 150000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05A105KP5NNNC#", "qty": 620000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05B471KB5NNNC#", "qty": 100000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05A226MQ5QUNC#", "qty": 220000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05B221KB5NNNC#", "qty": 30000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL03A104KQ3NNNC#", "qty": 50000, "pallet": "GMPL2607270028", "capa": "0603"}, {"cpn": "CL03A104KQ3NNNC#", "qty": 250000, "pallet": "GMPL2607270028", "capa": "0603"}, {"cpn": "CL03A104KQ3NNNC#", "qty": 170000, "pallet": "GMPL2607270028", "capa": "0603"}, {"cpn": "CL05B152KB5NNNC#", "qty": 160000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL31B106KOHZFNE#", "qty": 40000, "pallet": "GMPL2607270028", "capa": "3216"}, {"cpn": "CL05C220JB5NNNC#", "qty": 160000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL10A475KO8NNNC#", "qty": 8000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL05B471KB5NNNC#", "qty": 240000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL05C471JB5NNNC#", "qty": 110000, "pallet": "GMPL2607270028", "capa": "1005"}, {"cpn": "CL10A225KO8NNNC#", "qty": 80000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL10B102KB8NNNC#", "qty": 4000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL10B104KO8NNNC#", "qty": 96000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL10B392KB8NNNC#", "qty": 56000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL10C270JB8NNNC#", "qty": 16000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL10B103KA8NNNC#", "qty": 80000, "pallet": "GMPL2607270028", "capa": "1608"}, {"cpn": "CL21B474KBFNNNE", "qty": 2000, "pallet": "GMPL2607270028", "capa": "2012"}, {"cpn": "CL31B106KPHNNNE#", "qty": 74000, "pallet": "GMPL2607270030", "capa": "3216"}, {"cpn": "CL32A107MQVNNNE#", "qty": 5000, "pallet": "GMPL2607270030", "capa": "3225"}, {"cpn": "CL10A106KQ8NNNC#", "qty": 192000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL32A107MQVNNNE#", "qty": 4000, "pallet": "GMPL2607270030", "capa": "3225"}, {"cpn": "CL32A107MQVNNNE#", "qty": 14000, "pallet": "GMPL2607270030", "capa": "3225"}, {"cpn": "CL31B106KAHZW6E#", "qty": 60000, "pallet": "GMPL2607270030", "capa": "3216"}, {"cpn": "CL03A225MQ3CRNC#", "qty": 70000, "pallet": "GMPL2607270030", "capa": "0603"}, {"cpn": "CL05A474KP5NNNC#", "qty": 160000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL21A226MAYNNNE#", "qty": 64000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL21B106KPQNNNE#", "qty": 4000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL05A474KP5NNNC#", "qty": 140000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL05A474KP5NNNC#", "qty": 10000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL21B106KPQNNNE#", "qty": 8000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL32B106KBJNNNE#", "qty": 4000, "pallet": "GMPL2607270030", "capa": "3225"}, {"cpn": "CL03B102KO3NNNC#", "qty": 130000, "pallet": "GMPL2607270030", "capa": "0603"}, {"cpn": "CL03B102KO3NNNC#", "qty": 170000, "pallet": "GMPL2607270030", "capa": "0603"}, {"cpn": "CL05C470JB5NNNC#", "qty": 40000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL05A106MQ5NUNC#", "qty": 30000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL21A476MQYNNNE#", "qty": 10000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL10C330JB8NNNC#", "qty": 96000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL21X226MOYNNWE#", "qty": 4000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL21B475KPFNNNE#", "qty": 6000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL10A225KQ8NNNC#", "qty": 24000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL10A225KQ8NNNC#", "qty": 4000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL10X226MQ8QRWC#", "qty": 136000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL21B475KPFNNNE#", "qty": 8000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL10A106MO8NQNC#", "qty": 20000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL05C102JB5NNNC#", "qty": 40000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL10B106MQ8NRNC#", "qty": 48000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL10A106KQ8NNNC#", "qty": 52000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL21B475KOFNNNE#", "qty": 2000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL21B105KBFNNNE#", "qty": 82000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL21B475KOFNNNE#", "qty": 72000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL10C101JB8NNNC#", "qty": 1000000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL21A226KOQNNNE#", "qty": 86000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL05C470JB5NNNC#", "qty": 290000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL31B475KAHNNNE#", "qty": 28000, "pallet": "GMPL2607270030", "capa": "3216"}, {"cpn": "CL05C470JB5NNNC#", "qty": 10000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL21X226MOYNNWE#", "qty": 80000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL10A475KP8NNNC#", "qty": 120000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL05A105KO5NNNC#", "qty": 120000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL05A105KO5NNNC#", "qty": 80000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL05A105KQ5NNNC#", "qty": 1340000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL10A105KO8NNNC#", "qty": 36000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL21B473KBCNNNC#", "qty": 40000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL21B473KBCNNNC#", "qty": 64000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL21B473KBCNNNC#", "qty": 96000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL10A475KO8NNNC#", "qty": 4000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL10A475KO8NNNC#", "qty": 8000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL05B222KB5NNNC#", "qty": 80000, "pallet": "GMPL2607270030", "capa": "1005"}, {"cpn": "CL10C101JB8NNNC#", "qty": 500000, "pallet": "GMPL2607270030", "capa": "1608"}, {"cpn": "CL21B105KPFNNNE#", "qty": 258000, "pallet": "GMPL2607270030", "capa": "2012"}, {"cpn": "CL32A226KOJNNNE#", "qty": 174000, "pallet": "GMPL2607270030", "capa": "3225"}, {"cpn": "CL10B105KO8NNNC#", "qty": 672000, "pallet": "GMPL2607270033", "capa": "1608"}, {"cpn": "CL32A107MQVNNNE#", "qty": 21000, "pallet": "GMPL2607270033", "capa": "3225"}, {"cpn": "CL32B106KBJNNNE#", "qty": 24000, "pallet": "GMPL2607270033", "capa": "3225"}, {"cpn": "CL21B106KQQNNNE#", "qty": 2000, "pallet": "GMPL2607270033", "capa": "2012"}, {"cpn": "CL10A226MP8NUNE#", "qty": 18000, "pallet": "GMPL2607270033", "capa": "1608"}, {"cpn": "CL10X476MR8NRWC#", "qty": 8000, "pallet": "GMPL2607270033", "capa": "1608"}, {"cpn": "CL10A105KA8NNNC#", "qty": 12000, "pallet": "GMPL2607270033", "capa": "1608"}, {"cpn": "CL10C330JB8NNNC#", "qty": 4000, "pallet": "GMPL2607270033", "capa": "1608"}, {"cpn": "CL10B225KP8NNNC#", "qty": 8000, "pallet": "GMPL2607270033", "capa": "1608"}, {"cpn": "CL10X226MQ8QRWC#", "qty": 64000, "pallet": "GMPL2607270033", "capa": "1608"}, {"cpn": "CL10X226MQ8QRWC#", "qty": 52000, "pallet": "GMPL2607270033", "capa": "1608"}, {"cpn": "CL32B226KAJNNNE#", "qty": 56000, "pallet": "GMPL2607270033", "capa": "3225"}, {"cpn": "CL21B106KOQNNNE#", "qty": 1000000, "pallet": "GMPL2607270033", "capa": "2012"}, {"cpn": "CL31A226KAHNNNE#", "qty": 250000, "pallet": "GMPL2607270033", "capa": "3216"}, {"cpn": "CL05C101JB5NNNC#", "qty": 830000, "pallet": "GMPL2607270033", "capa": "1005"}, {"cpn": "CL05C101JB5NNNC#", "qty": 850000, "pallet": "GMPL2607270033", "capa": "1005"}, {"cpn": "CL31X226KAHN3NE#", "qty": 332000, "pallet": "GMPL2607270033", "capa": "3216"}, {"cpn": "CL31A226KAHNNNE#", "qty": 78000, "pallet": "GMPL2607270033", "capa": "3216"}, {"cpn": "CL21A475KAQNNNE#", "qty": 374000, "pallet": "GMPL2607270033", "capa": "2012"}, {"cpn": "CL21A475KAQNNNE#", "qty": 6000, "pallet": "GMPL2607270033", "capa": "2012"}, {"cpn": "CL21B106KOQNNNE#", "qty": 78000, "pallet": "GMPL2607270033", "capa": "2012"}, {"cpn": "CL21X226MQQNNNE#", "qty": 204000, "pallet": "GMPL2607270033", "capa": "2012"}, {"cpn": "CL21X226MQQNNNE#", "qty": 564000, "pallet": "GMPL2607270033", "capa": "2012"}, {"cpn": "CL05B221KB5NNNC#", "qty": 70000, "pallet": "GMPL2607270033", "capa": "1005"}, {"cpn": "CL10A105KP8NNNC#", "qty": 336000, "pallet": "GMPL2607270033", "capa": "1608"}, {"cpn": "CL05B152KB5NNNC#", "qty": 40000, "pallet": "GMPL2607270033", "capa": "1005"}, {"cpn": "CL21X107MRYNNWE#", "qty": 44000, "pallet": "GMPL2607270033", "capa": "2012"}, {"cpn": "CL32B106KBJNNWE#", "qty": 25000, "pallet": "GMPL2607270033", "capa": "3225"}, {"cpn": "CL05A475MQ5NRNC#", "qty": 140000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL21A476MQYNNNE#", "qty": 2000, "pallet": "GMPL2607270036", "capa": "2012"}, {"cpn": "CL32A227MQVNNNE#", "qty": 9000, "pallet": "GMPL2607270036", "capa": "3225"}, {"cpn": "CL32A227MQVNNNE#", "qty": 36000, "pallet": "GMPL2607270036", "capa": "3225"}, {"cpn": "CL21A106KPFNNNE#", "qty": 2000, "pallet": "GMPL2607270036", "capa": "2012"}, {"cpn": "CL05A475MP5NRNC#", "qty": 440000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL21F105ZBFNNNE#", "qty": 22000, "pallet": "GMPL2607270036", "capa": "2012"}, {"cpn": "CL10B474KP8NNNC#", "qty": 112000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL10X476MR8NRWC#", "qty": 24000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL10A106MQ8NNNC#", "qty": 8000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL10B105KO8NNNC#", "qty": 4000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL05A105KA5NQNC#", "qty": 580000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL05A105KO5NNNC#", "qty": 50000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL05B224KP5NNNC#", "qty": 40000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL10B104KO8NNNC#", "qty": 160000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL10B104KO8NNNC#", "qty": 168000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL31A107MQHNNNE#", "qty": 10000, "pallet": "GMPL2607270036", "capa": "3216"}, {"cpn": "CL10A225KQ8NNNC#", "qty": 16000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL10A225KP8NNNC#", "qty": 96000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL10B106MQ8NRNC#", "qty": 52000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL21B103KBANNNC#", "qty": 8000, "pallet": "GMPL2607270036", "capa": "2012"}, {"cpn": "CL10A476MQ8QRNC#", "qty": 40000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL10A225KP8NNNC#", "qty": 4000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL10B474KP8NNNC#", "qty": 500000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL21B106KOQNNNE#", "qty": 996000, "pallet": "GMPL2607270036", "capa": "2012"}, {"cpn": "CL21B475KAFNNNE#", "qty": 2000, "pallet": "GMPL2607270036", "capa": "2012"}, {"cpn": "CL05C471JB5NNNC#", "qty": 200000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL10C471JB8NNNC#", "qty": 48000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL31A107MQHNNNE#", "qty": 390000, "pallet": "GMPL2607270036", "capa": "3216"}, {"cpn": "CL10A475KA8NQNC#", "qty": 8000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL05A105KQ5NNNC#", "qty": 690000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL05B105KQ5NQNC#", "qty": 40000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL05A105KQ5NNNC#", "qty": 2560000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL05A105KO5NNNC#", "qty": 1540000, "pallet": "GMPL2607270036", "capa": "1005"}, {"cpn": "CL10A475KO8NNNC#", "qty": 8000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL21A106KOCLRNC#", "qty": 16000, "pallet": "GMPL2607270036", "capa": "2012"}, {"cpn": "CL10B102KC8NNNC#", "qty": 8000, "pallet": "GMPL2607270036", "capa": "1608"}, {"cpn": "CL31B475KBHNNNE#", "qty": 4000, "pallet": "GMPL2607270037", "capa": "3216"}, {"cpn": "CL21B105KAFNNNE#", "qty": 4000, "pallet": "GMPL2607270037", "capa": "2012"}, {"cpn": "CL10A105KB8NNNC#", "qty": 84000, "pallet": "GMPL2607270037", "capa": "1608"}, {"cpn": "CL21B105KBFNNNE#", "qty": 2000, "pallet": "GMPL2607270037", "capa": "2012"}, {"cpn": "CL32A107MQVNNNE#", "qty": 22000, "pallet": "GMPL2607270037", "capa": "3225"}, {"cpn": "CL21A475KBQNNNE#", "qty": 50000, "pallet": "GMPL2607270037", "capa": "2012"}, {"cpn": "CL10B472KB8NNNC#", "qty": 220000, "pallet": "GMPL2607270037", "capa": "1608"}];
+
+// aggregate helpers
+const pallets = {};
+DATA.forEach(d=>{
+  if(!pallets[d.pallet]) pallets[d.pallet] = {rows:[], items:0, totalQty:0, cpns:new Set()};
+  const p = pallets[d.pallet];
+  p.rows.push(d);
+  p.items++;
+  p.totalQty += (d.qty||0);
+  p.cpns.add(d.cpn);
+});
+const palletIds = Object.keys(pallets).sort();
+
+document.querySelector('#palletGrid').parentElement.querySelector('b').textContent = palletIds.length + ' משטחים';
+
+const searchInput = document.getElementById('searchInput');
+const clearBtn = document.getElementById('clearBtn');
+const resultsList = document.getElementById('resultsList');
+const resultCount = document.getElementById('resultCount');
+const searchView = document.getElementById('searchView');
+const palletsView = document.getElementById('palletsView');
+const palletGrid = document.getElementById('palletGrid');
+const palletGridWrap = document.getElementById('palletGridWrap');
+const palletDetail = document.getElementById('palletDetail');
+const tabs = document.querySelectorAll('.tab');
+
+function fmtQty(n){ return n.toLocaleString('en-US'); }
+
+function renderResults(filter){
+  const q = (filter||'').trim().toUpperCase();
+  let rows = DATA;
+  if(q){
+    rows = DATA.filter(d =>
+      d.cpn.toUpperCase().includes(q) ||
+      d.pallet.toUpperCase().includes(q) ||
+      (d.capa && d.capa.toUpperCase().includes(q))
+    );
+  }
+  resultCount.textContent = rows.length + ' ' + (rows.length===1 ? 'רשומה' : 'רשומות');
+  if(rows.length === 0){
+    resultsList.innerHTML = `<div class="empty"><b>לא נמצאו תוצאות</b>נסה מק״ט אחר או מספר משטח מלא/חלקי</div>`;
+    return;
+  }
+  resultsList.innerHTML = rows.map(d => `
+    <div class="card">
+      <div class="cap">${d.capa || '—'}</div>
+      <div class="body">
+        <div class="cpn">${d.cpn}</div>
+        <div class="row2">
+          <span class="pallet-tag" data-pallet="${d.pallet}">${d.pallet}</span>
+        </div>
+      </div>
+      <div class="qty">${fmtQty(d.qty)}<span>יח׳</span></div>
+    </div>
+  `).join('');
+}
+
+function renderPalletGrid(){
+  palletGrid.innerHTML = palletIds.map(pid => {
+    const p = pallets[pid];
+    return `
+    <div class="pallet-chip" data-pallet="${pid}">
+      <div class="pn">${pid}</div>
+      <div class="meta">${p.cpns.size} מק״טים · ${p.items} רשומות</div>
+    </div>`;
+  }).join('');
+}
+
+function openPallet(pid){
+  const p = pallets[pid];
+  if(!p) return;
+  palletGridWrap.style.display = 'none';
+  palletDetail.style.display = 'block';
+  palletDetail.innerHTML = `
+    <div class="pallet-header">
+      <div>
+        <div class="pn">${pid}</div>
+        <div class="cnt">${p.cpns.size} מק״טים שונים · ${p.items} רשומות · סה״כ ${fmtQty(p.totalQty)} יח׳</div>
+      </div>
+      <button class="back-btn" id="backToPallets">← כל המשטחים</button>
+    </div>
+    <div id="palletRows"></div>
+  `;
+  const rowsHtml = p.rows
+    .slice()
+    .sort((a,b)=> a.cpn.localeCompare(b.cpn))
+    .map(d => `
+      <div class="card">
+        <div class="cap">${d.capa || '—'}</div>
+        <div class="body">
+          <div class="cpn">${d.cpn}</div>
+        </div>
+        <div class="qty">${fmtQty(d.qty)}<span>יח׳</span></div>
+      </div>
+    `).join('');
+  document.getElementById('palletRows').innerHTML = rowsHtml;
+  document.getElementById('backToPallets').addEventListener('click', closePallet);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function closePallet(){
+  palletDetail.style.display = 'none';
+  palletDetail.innerHTML = '';
+  palletGridWrap.style.display = 'block';
+}
+
+function switchTab(name){
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  if(name === 'search'){
+    searchView.style.display = 'block';
+    palletsView.style.display = 'none';
+  } else {
+    searchView.style.display = 'none';
+    palletsView.style.display = 'block';
+    closePallet();
+  }
+}
+
+tabs.forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+
+searchInput.addEventListener('input', () => {
+  clearBtn.style.display = searchInput.value ? 'block' : 'none';
+  renderResults(searchInput.value);
+});
+clearBtn.addEventListener('click', () => {
+  searchInput.value = '';
+  clearBtn.style.display = 'none';
+  renderResults('');
+  searchInput.focus();
+});
+
+resultsList.addEventListener('click', (e) => {
+  const tag = e.target.closest('.pallet-tag');
+  if(tag){
+    switchTab('pallets');
+    openPallet(tag.dataset.pallet);
+  }
+});
+
+palletGrid.addEventListener('click', (e) => {
+  const chip = e.target.closest('.pallet-chip');
+  if(chip) openPallet(chip.dataset.pallet);
+});
+
+// init
+renderResults('');
+renderPalletGrid();
+</script>
+</body>
+</html>
